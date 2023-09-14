@@ -3,6 +3,9 @@ from tkinter import messagebox, ttk
 from PIL import Image, ImageTk
 import mysql.connector
 
+#initial setup mode
+sypassword= 'jarvis'
+sydatabase= 'hotel'
 #Dark mode
 is_dark_mode = False
 main_window = None
@@ -98,7 +101,7 @@ def open_form_window():
             return
 
         try:
-            db = mysql.connector.connect(host="localhost", user="root", password="jarvis", database="hotel")
+            db = mysql.connector.connect(host="localhost", user="root", password=sypassword, database=sydatabase)
 
             cursor = db.cursor()
 
@@ -126,7 +129,7 @@ def button_click(button_number):
 def display_past_bookings():
     
     try:
-        db = mysql.connector.connect(host="localhost", user="root", password="jarvis", database="hotel")
+        db = mysql.connector.connect(host="localhost", user="root", password=sypassword, database=sydatabase)
         cursor = db.cursor()
         cursor.execute("SELECT * FROM hotel")
         past_bookings_data = cursor.fetchall()
@@ -170,7 +173,7 @@ def room_edit_window():
         id_to_edit = id_entry.get()
 
         try:
-            db = mysql.connector.connect(host="localhost", user="root", password="jarvis", database="hotel")
+            db = mysql.connector.connect(host="localhost", user="root", password=sypassword, database=sydatabase)
             cursor = db.cursor()
             cursor.execute("SELECT * FROM hotel WHERE id = %s", (id_to_edit,))
             global data_to_edit
@@ -211,7 +214,7 @@ def room_edit_window():
             updated_room_type = room_type_var.get()
 
             try:
-                db = mysql.connector.connect(host="localhost", user="root", password="jarvis", database="hotel")
+                db = mysql.connector.connect(host="localhost", user="root", password=sypassword, database=sydatabase)
 
 
                 cursor = db.cursor()
@@ -245,7 +248,7 @@ def remove_record_window():
     def remove_record():
         id_to_remove = id_entry.get()
         try:
-            db = mysql.connector.connect(host="localhost", user="root", password="jarvis", database="hotel")
+            db = mysql.connector.connect(host="localhost", user="root", password=sypassword, database=sydatabase)
             cursor = db.cursor()
 
             cursor.execute("SELECT * FROM hotel WHERE id = %s", (id_to_remove,))
